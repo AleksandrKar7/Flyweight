@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using static ET_1_ChessBoard.Cell;
 
 namespace ET_1_ChessBoard.Flyweights
 {
     public class Flyweight
     {
-        public Cell _sharedState { get; }
+        public CellColor Color { get; set; }
+        private int[] WeightingAgent = new int[10000];
 
-        public Flyweight(Cell cell)
+        public Flyweight(CellColor color)
         {
-            this._sharedState = cell;
-        }
-
-        public void Operation(Cell uniqueState)
-        {
-            Console.WriteLine($"Flyweight: Displaying state.");
+            Color = color;
         }
     }
 }

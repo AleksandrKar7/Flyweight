@@ -35,7 +35,7 @@ namespace ET_1_ChessBoard.Logics.Printers
             int y = 0;
             while (y < board.NumberOfColumns)
             {
-                Console.BackgroundColor = cellsColor[board[x, y]._sharedState.Color];
+                Console.BackgroundColor = cellsColor[board[x, y].Flyweight.Color];
                 Console.Write(" ");
 
                 y++;

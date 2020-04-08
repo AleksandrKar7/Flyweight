@@ -1,24 +1,31 @@
 ﻿
+using ET_1_ChessBoard.Flyweights;
+using static ET_1_ChessBoard.Flyweights.Flyweight;
+
 namespace ET_1_ChessBoard
 {
     public class Cell
     {
-        //public int X { get; set; }
-        //public int Y { get; set; }
-        public CellColor Color { get; set; }
-        private int[] WeightingAgent = new int[10000];
-
+        public int X { get; set; }
+        public int Y { get; set; }
         public enum CellColor
         {
             White = 1,
             Black = 2
         }
 
-        public Cell(/*int x, int y, */CellColor color)
+        public Flyweight Flyweight { get; set; }
+
+        public Cell(int x, int y, Flyweight flyweight)
         {
-            //X = x;
-            //Y = y;
-            Color = color;
+            X = x;
+            Y = y;
+            Flyweight = flyweight;
         }
+
+        //public static void DoSomething()
+        //{
+        //    System.Console.WriteLine();
+        //}
     }
 }

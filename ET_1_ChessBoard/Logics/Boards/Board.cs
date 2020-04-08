@@ -1,15 +1,16 @@
 ﻿
 using ET_1_ChessBoard.Flyweights;
+using static ET_1_ChessBoard.Cell;
 
 namespace ET_1_ChessBoard.Logics.Boards
 {
     public class Board
     {
-        private Flyweight[,] cells;
+        private Cell[,] cells;
         private FlyweightFactory factory;
         public int NumberOfRows { get; set; }
         public int NumberOfColumns { get; set; }
-        public Flyweight this[int row, int column]
+        public Cell this[int row, int column]
         {
             get
             {
@@ -27,8 +28,8 @@ namespace ET_1_ChessBoard.Logics.Boards
             NumberOfRows = numberOfRows;
             NumberOfColumns = numberOfColumns;
             factory = new FlyweightFactory(
-                new Cell(Cell.CellColor.White)
-                , new Cell(Cell.CellColor.Black));
+                new Flyweight(CellColor.White)
+                , new Flyweight(CellColor.Black));
         }
 
         public virtual void InitCells()
@@ -37,7 +38,7 @@ namespace ET_1_ChessBoard.Logics.Boards
             int y = 0;
             bool isNextWhite = true;
 
-            cells = new Flyweight[NumberOfRows, NumberOfColumns];
+            cells = new Cell[NumberOfRows, NumberOfColumns];
             while (y <= cells.GetLength(1))
             {
                 if (x < cells.GetLength(0) && y == cells.GetLength(1))
@@ -52,25 +53,29 @@ namespace ET_1_ChessBoard.Logics.Boards
 
                 if (x % 2 == 1 && y == 0)
                 {
-                    cells[x, y] = factory.GetFlyweight(new Cell(Cell.CellColor.Black));
+                    cells[x, y] = new Cell(x, y,
+                        factory.GetFlyweight(new Flyweight(CellColor.Black)));
                     isNextWhite = true;
                     y++;
                 }
                 else if (x % 2 == 0 && y == 0)
                 {
-                    cells[x, y] = factory.GetFlyweight(new Cell(Cell.CellColor.White));
+                    cells[x, y] = new Cell(x, y,
+                        factory.GetFlyweight(new Flyweight(CellColor.White)));
                     isNextWhite = false;
                     y++;
                 }
 
                 if (isNextWhite)
                 {
-                    cells[x, y] = factory.GetFlyweight(new Cell(Cell.CellColor.White));
+                    cells[x, y] = new Cell(x, y,
+                        factory.GetFlyweight(new Flyweight(CellColor.White)));
                     isNextWhite = false;
                 }
                 else
                 {
-                    cells[x, y] = factory.GetFlyweight(new Cell(Cell.CellColor.Black));
+                    cells[x, y] = new Cell(x, y,
+                        factory.GetFlyweight(new Flyweight(CellColor.Black)));
                     isNextWhite = true;
                 }
                 y++;
